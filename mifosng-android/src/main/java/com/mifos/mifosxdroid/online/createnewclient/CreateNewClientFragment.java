@@ -414,7 +414,7 @@ public class CreateNewClientFragment extends ProgressableFragment
             if (!ValidationUtil.isNameValid(etClientFirstName.getEditableText().toString())) {
                 throw new InvalidTextInputException(getResources().getString(R.string.first_name),
                         getResources().getString(R.string.error_should_contain_only),
-                        InvalidTextInputException.TYPE_ALPHABETS);
+                        InvalidTextInputException.TYPE_ALPHABETS );
             }
         } catch (InvalidTextInputException e) {
             e.notifyUserWithToast(getActivity());
