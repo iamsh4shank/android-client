@@ -65,7 +65,7 @@
             android:text="@string/fill_now"
             android:background="@color/white"
             android:textColor="@color/primary"
-            android:id="@+id/btn_fillnow"
+            android:id="@+id/lnow"
             />
         <Button
             android:layout_width="wrap_content"

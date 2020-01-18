@@ -29,7 +29,7 @@ public class CollectionSheetDialogFragment extends BottomSheetDialogFragment {
     @BindView(R.id.tv_members)
     TextView tvMembers;
 
-    @BindView(R.id.btn_fillnow)
+    @BindView(R.id.lnow)
     Button btnFillnow;
 
     @BindView(R.id.btn_cancel)
@@ -79,7 +79,7 @@ public class CollectionSheetDialogFragment extends BottomSheetDialogFragment {
         tvMembers.setText(Integer.toString(members));
     }
 
-    @OnClick(R.id.btn_fillnow)
+    @OnClick(R.id.lnow)
     public void setBtnFillnow() {
         ((NewIndividualCollectionSheetFragment) getTargetFragment()).getResponse(Constants.FILLNOW);
     }
