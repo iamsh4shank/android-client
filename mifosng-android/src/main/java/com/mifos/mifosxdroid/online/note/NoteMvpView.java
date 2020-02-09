@@ -10,8 +10,6 @@ import java.util.List;
  */
 public interface NoteMvpView extends MvpView {
 
-    void showUserInterface();
-
     void showNote(List<Note> note);
 
     void showEmptyNotes();

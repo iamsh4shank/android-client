@@ -1,16 +1,24 @@
 package com.mifos.mifosxdroid.online.note;
 
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mifos.mifosxdroid.R;
 import com.mifos.mifosxdroid.adapters.NoteAdapter;
@@ -94,20 +102,6 @@ public class NoteFragment extends MifosBaseFragment implements NoteMvpView,
         ButterKnife.bind(this, rootView);
         notePresenter.attachView(this);
 
-        showUserInterface();
-        notePresenter.loadNote(entityType, entityId);
-
-        return rootView;
-    }
-
-    @Override
-    public void onRefresh() {
-        notePresenter.loadNote(entityType, entityId);
-    }
-
-    @Override
-    public void showUserInterface() {
-        setToolbarTitle(getResources().getString(R.string.note));
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvNote.setLayoutManager(mLayoutManager);
@@ -116,8 +110,36 @@ public class NoteFragment extends MifosBaseFragment implements NoteMvpView,
         swipeRefreshLayout.setColorSchemeColors(getActivity()
                 .getResources().getIntArray(R.array.swipeRefreshColors));
         swipeRefreshLayout.setOnRefreshListener(this);
+        notePresenter.loadNote(entityType, entityId);
+
+        setToolbarTitle(getString(R.string.note));
+        noteAdapter.notifyDataSetChanged();
+        Button button = rootView.findViewById(R.id.save_note);
+        final EditText editTextNotes =rootView.findViewById(R.id.et_notes);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+             insertSingleItem(editTextNotes.getText().toString());
+            }
+        });
+        return rootView;
     }
 
+    @Override
+    public void onRefresh() {
+        notePresenter.loadNote(entityType, entityId);
+    }
+
+    private void insertSingleItem(String notesText) {
+        Note note = new Note();
+        note.setNoteContent(notesText);
+        int insertIndex = 1;
+        notes.add(insertIndex, note);
+        noteAdapter.setNotes(notes);
+        Toast.makeText(getContext(), "save succesfully", Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void showNote(List<Note> notes) {
         this.notes = notes;
