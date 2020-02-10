@@ -1,16 +1,11 @@
 package com.mifos.mifosxdroid.online.note;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -138,7 +133,7 @@ public class NoteFragment extends MifosBaseFragment implements NoteMvpView,
         int insertIndex = 1;
         notes.add(insertIndex, note);
         noteAdapter.setNotes(notes);
-        Toast.makeText(getContext(), "save succesfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.notes_saved, Toast.LENGTH_SHORT).show();
     }
     @Override
     public void showNote(List<Note> notes) {
