@@ -135,6 +135,7 @@ public class NoteFragment extends MifosBaseFragment implements NoteMvpView,
         noteAdapter.setNotes(notes);
         Toast.makeText(getContext(), R.string.notes_saved, Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void showNote(List<Note> notes) {
         this.notes = notes;
